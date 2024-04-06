@@ -1,0 +1,97 @@
+body{
+    background-color: antiquewhite;
+}
+
+#heading{
+    display: flex;
+    background-color: rgb(66, 78, 117);
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    height: 60px;
+    align-items: center;
+}
+
+#topic{
+    font-size: 30px;
+    text-align: center;
+}
+
+pre,code{
+    background-color: black;
+    width: fit-content;
+    color: white;
+}
+
+pre::selection,code::selection{
+    color: black;
+    background-color: white;
+}
+
+h4 + p{
+    font-style: italic;
+}
+
+#nav{
+    border-top: black solid 1px;
+    display: block;
+    position: sticky;
+    bottom: 0px;
+    background-color: rgb(66, 78, 117);
+    margin: -8px;
+    
+}
+
+#nav > ul{
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+}
+
+#nav > ul > li{
+    font-size: 28px;
+    display: inline-block;
+    margin-right: 5px;
+    padding-right: 10px;
+    border-right: 1px solid white;
+}
+
+#nav > ul > li > *{
+    color: white;
+    text-decoration: none;
+}
+
+#nav > ul > li > a:hover{
+    background-color: black;
+}
+
+.current{
+    background-color: rgb(87, 116, 212);
+}
+
+a:hover > img{
+    border: 1px solid black;
+}
+
+#game{
+    margin-bottom: 15px;
+}
+
+#colorCheck{
+    display: flex;
+    border: 2px solid black ;
+    width: fit-content;
+}
+
+#color{
+    background-color: black;
+    height: 60px;
+    width: 60px;
+    margin-left: 30px;
+}
+
+#nav > ul > li > button{
+    position: relative;
+    bottom: 4px;
+    color: black;
+}

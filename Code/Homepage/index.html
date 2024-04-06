@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="icon" type="image/jpg" href="./Media/MyLogo.jpg">
+    <link rel="stylesheet" href="./styles.css" rel="stylesheet">
+</head>
+<body>
+    <div id="heading">Nathan Dsouza</div>
+    <div id="Container">
+        <h2>About Me</h2>
+        <div id="Pic1" class="box">
+            <div>
+                <img src="./Media/MyImage2.jpeg" alt="A picture of me" width="250px" height="">
+            </div>
+            <div>
+                <p>Hi, my name is Nathan, I am from Dubai and I have come to Canada to pursue a bachelor's Degree in Computer Science.
+                    <br>
+                    I have always had an interest in computers. As a kid, I would
+                    love to experiment with different software. I learned programming
+                    by first understanding the basics of loops, algorithms and the basic syntax
+                    in Pseudocode. Then I moved on to Python as it is an easy language to learn
+                    for beginners. I finished my CS course in school where I had to give Exams
+                    and Practicums based on Pseudocode and Python. After that, I came to Dalhousie
+                    because it was always my parent's dream to send me to Canada for university.
+                    I took Computer Science because I had a great understanding and a lot of interest
+                    in the field. I took CSCI 1110 and switched from Python
+                    to Java in a week. Most of my projects are from 1110 Assignments.
+                </p>
+            </div>
+        </div>
+        <div id="Pic2" class="box">
+            <div>
+                <p>
+                    I found CSCI 1109 interesting as it was a new way to
+                    play with data. I learnt that you can use Python modules to
+                    extract data from huge datasets containing thousands of rows
+                    and columns. It made me realize how strong our computers will
+                    be in the coming years.
+                </p>
+            </div>
+            <div>
+                <img src="./Media/MyImage1.jpeg" alt="An image of me at the airport" width="250px">
+            </div>
+        </div>
+        <div id="Vid1" class ="box">
+            <div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/V3XMYvqNCtk?si=0d5CkZkNu57S3Vgq" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div>
+                <p>
+                    When I was younger, I made a youtube channel and I made gaming videos. The video below is my channel intro. I made 
+                    it using a program called Blender.
+                </p>
+            </div>
+        </div>
+        <div class="box">
+            <div>
+                This is my channel logo which I made using Adobe Photoshop
+            </div>
+            <div>
+                <a href="https://www.youtube.com/channel/UCZNPb2E71_vYwJL6P8Enqjg" target="_blank"><img src="./Media/MyLogo.jpg" 
+                    alt="My channel logo" width="250"></a>
+                </div>
+            </div>
+            <div class="box">
+                <div>
+                    <audio controls>
+                        <source src="./Media/music.wav">
+                    </audio>
+                </div>
+                <div>
+                    This is a beat I made using FLStudio
+                </div>
+            </div>
+        </div>
+        Media created by Nathan Dsouza
+        <br>
+        <br>
+        <div id="form">
+        <div class="form-container">
+			<form id="sign-up-form" action="#">
+				<h2 id="form-title">Questionnaire</h2>
+				<div class="input-container">
+					<label for="email">When do you brush your teeth</label>
+					<input type="checkbox" id="Morning" name="boolean" value="Morning" />
+                    <label for="Morning">Morning</label>
+                    <input type="checkbox" id="Night" name="boolean" value="Night" />
+                    <label for="Night">Night</label>
+				</div>
+                <div class="input-container">
+					<label for="email">Do you eat breakfast?</label>
+					<input type="radio" id="Yes" name="boolean" value="Yes" />
+                    <label for="Yes">Yes</label>
+                    <input type="radio" id="No" name="boolean" value="No" />
+                    <label for="No">No</label>
+				</div>
+                <div class="input-container">
+					<label for="email">Pick your favorite color</label>
+					<input type="color" id="picker" name="picker" />
+				</div>
+				<div class="input-container">
+					<label for="improve">What is your favorite food?</label>
+					<input type="text" id="improve" name="improve" />
+				</div>
+				<div class="input-container">
+					<label for="bday">When is your Birthday?</label>
+					<input
+						type="date"
+						id="bday"
+						name="bday"
+					/>
+				</div>
+                <div class="input-container">
+                    <label for="email">Enter your Dal email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+				<div class="button-container">
+                    <button id="button" type="button">Submit</button>
+				</div>
+
+				<div id="message-panel"></div>
+			</form>
+		</div>
+        </div>
+        <div id="nav">
+            <ul>
+                <li><a href="../Homepage/index.html" class="current">Homepage</a></li>
+                <li><a href="../Qualifications/qualifications.html">My Qualifications</a></li>
+                <li><a href="../Projects/projects.html">My Projects</a></li>
+                <li><a href="mailto: dsouzanathan@gmail.com">Email</a></li>
+                <li><button onclick="Scheme1()" id="color1">Color scheme 1</button></li>
+                <li><button onclick="Scheme2()" id="color2">Color scheme 2</button></li>
+                <li><button onclick="Scheme3()" id="color3">Color scheme 3</button></li>
+            </ul>
+        </div>
+        <script src="./script.js"></script>  
+    </body>
+</html>

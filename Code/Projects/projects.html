@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <link rel="icon" type="image/jpg" href="../Homepage/Media/MyLogo.jpg">
+    <link rel="stylesheet" href="./styles.css">   
+</head>
+
+<body>
+    <div id="heading">Nathan Dsouza</div>
+    <h3 id="topic">My Projects</h3>
+    <h4>Converting Infix expression to Postfix expression</h4>
+    <p>I programmed code in Java for a RPN Calculator in my 1110 assignment that would change a math expression 
+    to RPN notation.</p>
+    <h5>Variables</h5>
+<code>
+private Stack<Integer> valueStack;<br>
+private Stack<String> operatorStack;<br>
+private Queue<String> outputQueue;<br>
+private ArrayList<String> validCharacters;<br>
+private ArrayList<String> validCharactersToRPN;<br>
+private ArrayList<String> parantheses;<br>
+private int leftParanthesis;<br>
+private int rightParanthesis;<br>
+</code>
+    <h5>Constructor</h5>
+<code>
+<pre>
+public RPNCalculator(){
+validCharacters = new ArrayList<String>();
+valueStack = new Stack<Integer>();
+outputQueue = new LinkedList<String>();
+operatorStack = new Stack<String>();
+parantheses = new ArrayList<String>();
+validCharacters.add("+");
+validCharacters.add("-");
+validCharacters.add("*");
+validCharacters.add("/");
+validCharacters.add("^");
+validCharactersToRPN = new ArrayList<String>(validCharacters);
+validCharactersToRPN.remove("^");
+parantheses.add("(");
+parantheses.add(")");
+}
+</pre>
+</code>
+<br>
+<h5>Method</h5>
+<code>
+<pre>
+public int evaluateExpression(String expression){
+    String currentWord;
+    int firstNum;
+    int secondNum;
+    String[] Words = expression.split(" ");
+    for (int i = 0; i < Words.length; i++) {
+        currentWord = Words[i];
+        Scanner sc = new Scanner(currentWord);
+        if (sc.hasNextInt()){
+            valueStack.push(sc.nextInt());
+        }else if (validCharacters.contains(currentWord)){
+            switch (currentWord){
+                case "+":
+                    try {
+                        firstNum = valueStack.pop();
+                        secondNum = valueStack.pop();
+                        valueStack.push(firstNum + secondNum);
+                    }catch(Exception e) {
+                        throw new ArithmeticException("Not enough operands in the stack");
+                    }
+                    break;
+                case "-":
+                    try {
+                        firstNum = valueStack.pop();
+                        secondNum = valueStack.pop();
+                        valueStack.push(secondNum - firstNum);
+                    }catch(Exception e) {
+                        throw new ArithmeticException("Not enough operands in the stack");
+                    }
+                    break;
+                case "*":
+                    try {
+                        firstNum = valueStack.pop();
+                        secondNum = valueStack.pop();
+                        valueStack.push(firstNum * secondNum);
+                    }catch(Exception e) {
+                        throw new ArithmeticException("Not enough operands in the stack");
+                    }
+                    break;
+                case "/":
+                    try {
+                        firstNum = valueStack.pop();
+                        secondNum = valueStack.pop();
+                        valueStack.push(secondNum / firstNum);
+                    }catch(Exception e) {
+                        throw new ArithmeticException("Not enough operands in the stack");
+                    }
+                    break;
+                case "^":
+                    try {
+                        firstNum = valueStack.pop();
+                        secondNum = valueStack.pop();
+                        valueStack.push((int) Math.pow(secondNum,firstNum));
+                    }catch(Exception e) {
+                        throw new ArithmeticException("Not enough operands in the stack");
+                    }
+                    break;
+            }
+        }else throw new ArithmeticException("Invalid operator");
+    }
+    return valueStack.pop();
+}    
+</pre>
+</code>
+<h4>Logic for the game "Frogger"</h4>
+<p>
+I programmed classes in Java for a simple Frogger game.
+</p>
+<h5>Car class</h5>
+<code>
+<pre>
+public class Car {
+    private Point currentPosition;
+    private Color bodyColour;
+    private int movementSpeed;
+    private int xSize;
+    private int ySize;
+    private boolean moveLeft;
+
+    public Car(Point currentPosition, Color bodyColour, int movementSpeed, int xSize, int ySize, boolean moveLeft) {
+        this.currentPosition = currentPosition;
+        this.bodyColour = bodyColour;
+        this.movementSpeed = movementSpeed;
+        this.xSize = xSize;
+        this.ySize = ySize;
+        this.moveLeft = moveLeft;
+    }
+
+    /**
+     * Getter for current position of car.
+     * @return the cars position as Point
+     */
+    public Point getCurrentPosition() {
+        return currentPosition;
+    }
+
+    /**
+     * Getter for color of car
+     * @return the cars color as Color
+     */
+    public Color getBodyColour() {
+        return bodyColour;
+    }
+
+    /**
+     * Getter for speed of car
+     * @return the speed of car as Integer
+     */
+    public int getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    /**
+     * Getter for vertical size of car
+     * @return the vertical size of car as Integer
+     */
+    public int getXSize() {
+        return xSize;
+    }
+
+    /**
+     * Getter for horizontal size of car
+     * @return the horizontal size of car as Integer
+     */
+    public int getYSize() {
+        return ySize;
+    }
+
+    /**
+     * Getter for direction of car
+     * @return true if car is moving right to left, false if vice-versa
+     */
+    public boolean isMoveLeft(){
+        return moveLeft;
+    }
+
+    /**
+     * Moves car to start if position exceeds the right edge (right cars)
+     * Moves car to the right edge if position exceeds 0 (left cars)
+     * @param rightEdge the right boundary of the game which the cars cant pass through
+     */
+    public void resetCarPosition(int rightEdge){
+        if (moveLeft){
+            if (this.currentPosition.x <= 0){
+                currentPosition.setLocation(rightEdge,this.currentPosition.y);
+            }
+        }else {
+            if(this.currentPosition.x >= rightEdge){
+                currentPosition.setLocation(0,this.currentPosition.y);
+            }
+        }
+    }
+
+    /**
+     * Moves the car to its respectful directions by speed
+     */
+    public void move(){
+        if(moveLeft) {
+            this.currentPosition.x -= movementSpeed;
+        }else this.currentPosition.x += movementSpeed;
+    }
+
+    /**
+     * Returns the bounds of the car object which can be used to detect collision
+     * @return A Rectangle object defining the bounds of the car
+     */
+    public Rectangle getCollisionBounds(){
+        return new Rectangle(currentPosition.x, currentPosition.y,xSize,ySize);
+    }
+}
+</pre>
+</code>
+<h5>Frog class</h5>
+<code>
+<pre>
+public class Frog {
+    private String name;
+    private Point currentPosition;
+
+    private static final Point zeroPosition = new Point(0, 0);
+
+
+    public Frog(String name, Point currentPosition) {
+        this.name = name;
+        this.currentPosition = currentPosition;
+    }
+    public Frog(String name) {
+        this(name, zeroPosition);
+    }
+
+    /**
+     * Getter for name of frog
+     * @return the name of frog as String
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Getter for position of frog
+     * @return the position of frog as Point
+     */
+    public Point getCurrentPosition() {
+        return currentPosition;
+    }
+
+    /**
+     * Changes the position of the frog according to x and y coordinates
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    public void move(int x, int y){
+        currentPosition.translate(x,y);
+    }
+
+    /**
+     * Calculates the distance between the frog and the point in the argument.
+     * Uses the algebraic formula for finding the distance between two points on a straight line
+     * Formula = ((x2 - x1)^2 + (y2 - y1)^2)^(1/2)
+     * @param point the point from the frog to calculate the distance between
+     * @return the distance as a double
+     */
+    public double distanceFromPoint(Point point){
+        double distance = 0;
+        if (!(currentPosition.equals(point))){
+            distance = Math.sqrt(Math.pow((point.x - currentPosition.x),2) + Math.pow((point.y - currentPosition.y),2));
+        }
+        return distance;
+    }
+
+    /**
+     * Uses the objects instance variables to format a string which displays those variables so when object itself
+     * can be used as an argument which will return this string
+     * @return the formatted string which displays the name and position of the object
+     */
+    public String toString() {
+        return("The frog named " + name + " is at (" +currentPosition.x+","+currentPosition.y+")");
+    }
+}
+</pre>
+</code>
+<h5>Game class</h5>
+<code>
+<pre>
+public class Game {
+    private Frog player;
+    private ArrayList<Car> cars = new ArrayList<Car>();
+
+    /**
+     * Initializer which initializes the players frog and the preset cars
+     * @param Player the player name
+     * @param startingPosition the players starting position
+     */
+    public Game(String Player, Point startingPosition) {
+        player = new Frog(Player, startingPosition);
+        Point position1 = new Point(100, 400);
+        Point position2 = new Point(0, 300);
+        Point position3 = new Point(100, 150);
+        Point position4 = new Point(0, 80);
+        cars.add(new Car(position1, Color.black, 10, 120, 75, false));
+        cars.add(new Car(position2, Color.blue, 30, 200, 75, false));
+        cars.add(new Car(position3, Color.black, 10, 120, 75, true));
+        cars.add(new Car(position4, Color.black, 20, 120, 75, true));
+    }
+
+    /**
+     * Getter for player name
+     * @return the player name
+     */
+    public Frog getPlayer() {
+        return player;
+    }
+
+    /**
+     * Getter for the arraylist holding the cars
+     * @return the arraylist holding the cars
+     */
+    public ArrayList<Car> getCars() {
+        return cars;
+    }
+
+    /**
+     * This method moves the players frog according to respective key presses
+     * @param keyPressed the key pressed, this value represents the value of the arrow keys
+     * @param distanceMoved the distance to be moved with each key press
+     */
+    public void movePlayer(int keyPressed, int distanceMoved) {
+        if (keyPressed == KeyEvent.VK_UP) {
+            player.move(0, -distanceMoved);
+        } else if (keyPressed == KeyEvent.VK_DOWN) {
+            player.move(0, distanceMoved);
+        } else if (keyPressed == KeyEvent.VK_RIGHT) {
+            player.move(distanceMoved, 0);
+        } else if (keyPressed == KeyEvent.VK_LEFT) {
+            player.move(-distanceMoved, 0);
+        }
+    }
+
+    /**
+     * The method which keeps the cars moving and keeps them from going out of the edges using the
+     * resetCarPosition method from the Car class
+     * @param rightEdge the right edge (x position) of the game which the car cannot go through (no need for left edge
+     *                 as it would obviously be x = 0)
+     */
+    public void moveCars(int rightEdge) {
+        for (int i = 0; i < cars.size(); i++) {
+            Car currentCar = cars.get(i);
+            currentCar.resetCarPosition(rightEdge);
+            currentCar.move();
+            currentCar.resetCarPosition(rightEdge);
+        }
+    }
+
+    /**
+     * This method checks if the player is hit by checking if the player's frog coordinates intersect with the edges of
+     * the cars
+     * @return if the player collides with a car as boolean
+     */
+    public boolean isPlayerHit() {
+        for (Car car : cars) {
+            Rectangle currentCar = car.getCollisionBounds();
+            if (player.getCurrentPosition().x >= currentCar.x
+                    &&
+                    player.getCurrentPosition().x <= (currentCar.x + currentCar.width)
+                    &&
+                    player.getCurrentPosition().y <= currentCar.y
+                    &&
+                    player.getCurrentPosition().y >= (currentCar.y - currentCar.height)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the player has reached the finish line after passing through all the cars
+     * @return true if player has finished (false respectively) as boolean
+     */
+    public boolean hasPlayerWon() {
+        return player.getCurrentPosition().y <= 20;
+    }
+}
+</pre>
+</code>
+<div id="game">
+    <h5>Heres a rgb color "game" where you can see what happens with red or blue or green</h5>
+    <div id="colorCheck">
+    <div id="checks">
+    <input type="checkbox" id="red" name="red" value="red">
+    <label for="vehicle1">Red</label><br>
+    <input type="checkbox" id="green" name="green" value="green">
+    <label for="vehicle2">Green</label><br>
+    <input type="checkbox" id="blue" name="blue" value="blue">
+    <label for="vehicle3">Blue</label><br>
+    </div>
+    <div id="color">
+        &nbsp
+    </div>
+    </div>
+</div>
+    
+    <div id="nav">
+        <ul>
+            <li><a href="../Homepage/index.html">Homepage</a></li>
+            <li><a href="../Qualifications/qualifications.html">My Qualifications</a></li>
+            <li><a href="../Projects/projects.html" class="current">My Projects</a></li>
+            <li><a href="mailto: dsouzanathan@gmail.com">Email</a></li>
+            <li><button onclick="Scheme1()" id="color1">Color scheme 1</button></li>
+            <li><button onclick="Scheme2()" id="color2">Color scheme 2</button></li>
+            <li><button onclick="Scheme3()" id="color3">Color scheme 3</button></li>
+        </ul>
+        </div>
+<script src="./script.js"></script>
+</body>
+</html>
